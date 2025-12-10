@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { ArrowDown, Github, Linkedin, Twitter } from 'lucide-react';
+import { ArrowDown, Github } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const HeroSection = () => {
   const [displayText, setDisplayText] = useState('');
   const [currentIndex, setCurrentIndex] = useState(0);
-  const titles = ['Web Developer', 'UI/UX Enthusiast', 'React Specialist', 'Creative Coder'];
+  const { t } = useLanguage();
+  const titles = t.hero.titles;
 
   useEffect(() => {
     const currentTitle = titles[currentIndex];
@@ -33,7 +35,7 @@ const HeroSection = () => {
     }, 100);
 
     return () => clearInterval(typeEffect);
-  }, [currentIndex]);
+  }, [currentIndex, titles]);
 
   const scrollToProjects = () => {
     document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' });
@@ -67,13 +69,13 @@ const HeroSection = () => {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass-card border border-primary/30 mb-8 animate-fade-in">
             <span className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-            <span className="text-sm text-muted-foreground">Available for freelance work</span>
+            <span className="text-sm text-muted-foreground">{t.hero.available}</span>
           </div>
 
           {/* Main Heading */}
           <h1 className="text-5xl md:text-7xl lg:text-8xl font-mono font-bold mb-6 animate-slide-up">
-            Hi, I'm{' '}
-            <span className="text-gradient">Alex</span>
+            {t.hero.greeting}{' '}
+            <span className="text-gradient">{t.hero.name}</span>
           </h1>
 
           {/* Typing Effect */}
@@ -86,36 +88,30 @@ const HeroSection = () => {
 
           {/* Description */}
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 animate-slide-up" style={{ animationDelay: '0.4s' }}>
-            I craft beautiful, responsive, and user-friendly web experiences. 
-            Turning ideas into reality with clean code and creative solutions.
+            {t.hero.description}
           </p>
 
           {/* CTA Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12 animate-slide-up" style={{ animationDelay: '0.6s' }}>
             <Button variant="hero" size="xl" onClick={scrollToProjects}>
-              View My Work
+              {t.hero.viewWork}
             </Button>
             <Button variant="outline" size="xl" onClick={scrollToContact}>
-              Let's Talk
+              {t.hero.letsTalk}
             </Button>
           </div>
 
           {/* Social Links */}
           <div className="flex gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.8s' }}>
-            {[
-              { icon: Github, href: '#', label: 'GitHub' },
-              { icon: Linkedin, href: '#', label: 'LinkedIn' },
-              { icon: Twitter, href: '#', label: 'Twitter' },
-            ].map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                className="p-3 rounded-full glass-card border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 hover-glow"
-                aria-label={social.label}
-              >
-                <social.icon className="w-5 h-5" />
-              </a>
-            ))}
+            <a
+              href="https://github.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-full glass-card border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 hover-glow"
+              aria-label="GitHub"
+            >
+              <Github className="w-5 h-5" />
+            </a>
           </div>
         </div>
       </div>
