@@ -2,13 +2,11 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, MapPin, Phone, Send, CheckCircle } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
-import { useLanguage } from '@/contexts/LanguageContext';
 
 const ContactSection = () => {
   const { toast } = useToast();
-  const { t } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [formData, setFormData] = useState({
@@ -26,24 +24,15 @@ const ContactSection = () => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Send email via mailto link with form data
-    const mailtoLink = `mailto:temaimpulsovweb@gmail.com?subject=${encodeURIComponent(
-      `[Portfolio] ${formData.subject}`
-    )}&body=${encodeURIComponent(
-      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
-    )}`;
-    
-    window.location.href = mailtoLink;
-    
-    // Simulate delay for UX
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    // Simulate form submission
+    await new Promise(resolve => setTimeout(resolve, 1500));
     
     setIsSubmitting(false);
     setIsSubmitted(true);
     
     toast({
-      title: t.contact.toastTitle,
-      description: t.contact.toastDescription,
+      title: "Message sent!",
+      description: "Thanks for reaching out. I'll get back to you soon!",
     });
 
     // Reset form after delay
@@ -56,14 +45,20 @@ const ContactSection = () => {
   const contactInfo = [
     {
       icon: Mail,
-      title: t.contact.email,
-      value: 'temaimpulsovweb@gmail.com',
-      href: 'mailto:temaimpulsovweb@gmail.com',
+      title: 'Email',
+      value: 'alex@developer.com',
+      href: 'mailto:alex@developer.com',
+    },
+    {
+      icon: Phone,
+      title: 'Phone',
+      value: '+1 (555) 123-4567',
+      href: 'tel:+15551234567',
     },
     {
       icon: MapPin,
-      title: t.contact.location,
-      value: 'Secret',
+      title: 'Location',
+      value: 'San Francisco, CA',
       href: '#',
     },
   ];
@@ -77,12 +72,12 @@ const ContactSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <span className="text-primary font-mono text-sm mb-2 block">{t.contact.label}</span>
+          <span className="text-primary font-mono text-sm mb-2 block">// Get In Touch</span>
           <h2 className="text-4xl md:text-5xl font-mono font-bold mb-4">
-            {t.contact.title} <span className="text-gradient">{t.contact.titleHighlight}</span>
+            Let's Work <span className="text-gradient">Together</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            {t.contact.description}
+            Have a project in mind? I'd love to hear about it. Let's create something amazing together.
           </p>
         </div>
 
@@ -115,10 +110,10 @@ const ContactSection = () => {
             <div className="glass-card rounded-xl p-6 glow-primary">
               <div className="flex items-center gap-3 mb-3">
                 <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span className="font-mono font-medium">{t.contact.available}</span>
+                <span className="font-mono font-medium">Currently Available</span>
               </div>
               <p className="text-muted-foreground text-sm">
-                {t.contact.availableDesc}
+                I'm currently accepting new projects. Let's discuss how I can help bring your ideas to life.
               </p>
             </div>
           </div>
@@ -131,29 +126,29 @@ const ContactSection = () => {
                   <div className="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-4 animate-scale-in">
                     <CheckCircle className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="font-mono font-semibold text-xl mb-2">{t.contact.messageSent}</h3>
-                  <p className="text-muted-foreground">{t.contact.getBackSoon}</p>
+                  <h3 className="font-mono font-semibold text-xl mb-2">Message Sent!</h3>
+                  <p className="text-muted-foreground">I'll get back to you as soon as possible.</p>
                 </div>
               ) : (
                 <>
                   <div className="grid sm:grid-cols-2 gap-6">
                     <div className="space-y-2">
                       <label htmlFor="name" className="font-mono text-sm text-muted-foreground">
-                        {t.contact.yourName}
+                        Your Name
                       </label>
                       <Input
                         id="name"
                         name="name"
                         value={formData.name}
                         onChange={handleChange}
-                        placeholder={t.contact.namePlaceholder}
+                        placeholder="John Doe"
                         required
                         className="bg-muted/30 border-border/50 focus:border-primary h-12"
                       />
                     </div>
                     <div className="space-y-2">
                       <label htmlFor="email" className="font-mono text-sm text-muted-foreground">
-                        {t.contact.yourEmail}
+                        Your Email
                       </label>
                       <Input
                         id="email"
@@ -161,7 +156,7 @@ const ContactSection = () => {
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
-                        placeholder={t.contact.emailPlaceholder}
+                        placeholder="john@example.com"
                         required
                         className="bg-muted/30 border-border/50 focus:border-primary h-12"
                       />
@@ -170,14 +165,14 @@ const ContactSection = () => {
 
                   <div className="space-y-2">
                     <label htmlFor="subject" className="font-mono text-sm text-muted-foreground">
-                      {t.contact.subject}
+                      Subject
                     </label>
                     <Input
                       id="subject"
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      placeholder={t.contact.subjectPlaceholder}
+                      placeholder="Project Inquiry"
                       required
                       className="bg-muted/30 border-border/50 focus:border-primary h-12"
                     />
@@ -185,14 +180,14 @@ const ContactSection = () => {
 
                   <div className="space-y-2">
                     <label htmlFor="message" className="font-mono text-sm text-muted-foreground">
-                      {t.contact.message}
+                      Message
                     </label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder={t.contact.messagePlaceholder}
+                      placeholder="Tell me about your project..."
                       required
                       rows={5}
                       className="bg-muted/30 border-border/50 focus:border-primary resize-none"
@@ -209,11 +204,11 @@ const ContactSection = () => {
                     {isSubmitting ? (
                       <>
                         <span className="animate-spin">⏳</span>
-                        {t.contact.sending}
+                        Sending...
                       </>
                     ) : (
                       <>
-                        {t.contact.sendMessage}
+                        Send Message
                         <Send className="w-4 h-4" />
                       </>
                     )}
