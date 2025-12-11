@@ -1,42 +1,33 @@
 import { Layout, Smartphone, Palette, Gauge, Code, Database } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ServicesSection = () => {
+  const { t } = useLanguage();
+
   const services = [
     {
       icon: Layout,
-      title: 'Web Development',
-      description: 'Building modern, responsive websites and web applications using the latest technologies and best practices.',
-      features: ['Custom websites', 'E-commerce solutions', 'CMS integration'],
-    },
-    {
-      icon: Smartphone,
-      title: 'Responsive Design',
-      description: 'Ensuring your website looks and works perfectly on all devices, from mobile phones to large desktops.',
-      features: ['Mobile-first approach', 'Cross-browser support', 'Fluid layouts'],
+      title: t.services.items.webDev.title,
+      description: t.services.items.webDev.description,
+      features: t.services.items.webDev.features,
     },
     {
       icon: Palette,
-      title: 'UI/UX Design',
-      description: 'Creating intuitive and visually appealing user interfaces that enhance user experience and engagement.',
-      features: ['User research', 'Wireframing', 'Prototyping'],
-    },
-    {
-      icon: Gauge,
-      title: 'Performance Optimization',
-      description: 'Optimizing websites for speed and performance to ensure fast loading times and smooth interactions.',
-      features: ['Code optimization', 'Image compression', 'Caching strategies'],
+      title: t.services.items.uiux.title,
+      description: t.services.items.uiux.description,
+      features: t.services.items.uiux.features,
     },
     {
       icon: Code,
-      title: 'API Integration',
-      description: 'Connecting your website with third-party services and APIs to extend functionality and automate processes.',
-      features: ['REST APIs', 'GraphQL', 'Payment gateways'],
+      title: t.services.items.backend.title,
+      description: t.services.items.backend.description,
+      features: t.services.items.backend.features,
     },
     {
       icon: Database,
-      title: 'Database Solutions',
-      description: 'Designing and implementing efficient database structures for your web applications.',
-      features: ['Database design', 'Data migration', 'Query optimization'],
+      title: t.services.items.consulting.title,
+      description: t.services.items.consulting.description,
+      features: t.services.items.consulting.features,
     },
   ];
 
@@ -55,16 +46,16 @@ const ServicesSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <span className="text-primary font-mono text-sm mb-2 block">// What I Do</span>
+          <span className="text-primary font-mono text-sm mb-2 block">{t.services.sectionTitle}</span>
           <h2 className="text-4xl md:text-5xl font-mono font-bold mb-4">
-            My <span className="text-gradient">Services</span>
+            {t.services.title.split(' ')[0]} <span className="text-gradient">{t.services.title.split(' ').slice(1).join(' ')}</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Comprehensive web development services tailored to your needs
+            {t.services.description}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
             <div
               key={service.title}
