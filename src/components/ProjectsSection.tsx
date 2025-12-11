@@ -1,17 +1,24 @@
 import { useState } from 'react';
 import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const ProjectsSection = () => {
+  const { t } = useLanguage();
   const [activeFilter, setActiveFilter] = useState('all');
 
-  const filters = ['all', 'web app', 'landing page', 'e-commerce'];
+  const filters = [
+    { key: 'all', label: t.projects.filters.all },
+    { key: 'web app', label: t.projects.filters.webapp },
+    { key: 'landing page', label: 'Landing Page' },
+    { key: 'e-commerce', label: t.projects.filters.ecommerce },
+  ];
 
   const projects = [
     {
       id: 1,
-      title: 'E-Commerce Platform',
-      description: 'A modern e-commerce solution with cart functionality, payment integration, and admin dashboard.',
+      title: t.projects.items.ecommerce.title,
+      description: t.projects.items.ecommerce.description,
       image: 'linear-gradient(135deg, hsl(174 72% 56% / 0.3), hsl(280 70% 60% / 0.3))',
       category: 'e-commerce',
       tags: ['React', 'Node.js', 'Stripe', 'MongoDB'],
@@ -20,8 +27,8 @@ const ProjectsSection = () => {
     },
     {
       id: 2,
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates and team features.',
+      title: t.projects.items.taskManager.title,
+      description: t.projects.items.taskManager.description,
       image: 'linear-gradient(135deg, hsl(280 70% 60% / 0.3), hsl(24 95% 60% / 0.3))',
       category: 'web app',
       tags: ['Next.js', 'TypeScript', 'PostgreSQL', 'Socket.io'],
@@ -30,8 +37,8 @@ const ProjectsSection = () => {
     },
     {
       id: 3,
-      title: 'SaaS Landing Page',
-      description: 'A conversion-focused landing page for a SaaS product with animations and interactive elements.',
+      title: t.projects.items.portfolio.title,
+      description: t.projects.items.portfolio.description,
       image: 'linear-gradient(135deg, hsl(24 95% 60% / 0.3), hsl(174 72% 56% / 0.3))',
       category: 'landing page',
       tags: ['React', 'Framer Motion', 'Tailwind CSS'],
@@ -40,31 +47,31 @@ const ProjectsSection = () => {
     },
     {
       id: 4,
-      title: 'Portfolio Website',
-      description: 'A creative portfolio website showcasing work with smooth animations and modern design.',
+      title: t.projects.items.analytics.title,
+      description: t.projects.items.analytics.description,
       image: 'linear-gradient(135deg, hsl(174 72% 56% / 0.4), hsl(280 70% 60% / 0.2))',
-      category: 'landing page',
-      tags: ['React', 'GSAP', 'Three.js'],
-      liveUrl: '#',
-      githubUrl: '#',
-    },
-    {
-      id: 5,
-      title: 'Analytics Dashboard',
-      description: 'A comprehensive analytics dashboard with interactive charts and data visualization.',
-      image: 'linear-gradient(135deg, hsl(280 70% 60% / 0.4), hsl(174 72% 56% / 0.2))',
       category: 'web app',
       tags: ['React', 'D3.js', 'GraphQL', 'PostgreSQL'],
       liveUrl: '#',
       githubUrl: '#',
     },
     {
+      id: 5,
+      title: t.projects.items.socialApp.title,
+      description: t.projects.items.socialApp.description,
+      image: 'linear-gradient(135deg, hsl(280 70% 60% / 0.4), hsl(174 72% 56% / 0.2))',
+      category: 'web app',
+      tags: ['Next.js', 'Prisma', 'PostgreSQL'],
+      liveUrl: '#',
+      githubUrl: '#',
+    },
+    {
       id: 6,
-      title: 'Online Store',
-      description: 'A fully-featured online store with product filtering, wishlist, and order tracking.',
+      title: t.projects.items.weather.title,
+      description: t.projects.items.weather.description,
       image: 'linear-gradient(135deg, hsl(24 95% 60% / 0.4), hsl(280 70% 60% / 0.2))',
-      category: 'e-commerce',
-      tags: ['Next.js', 'Prisma', 'Stripe', 'Tailwind'],
+      category: 'web app',
+      tags: ['React', 'REST APIs', 'Tailwind'],
       liveUrl: '#',
       githubUrl: '#',
     },
@@ -78,12 +85,12 @@ const ProjectsSection = () => {
     <section id="projects" className="py-24 relative">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
-          <span className="text-primary font-mono text-sm mb-2 block">// My Work</span>
+          <span className="text-primary font-mono text-sm mb-2 block">{t.projects.sectionTitle}</span>
           <h2 className="text-4xl md:text-5xl font-mono font-bold mb-4">
-            Featured <span className="text-gradient">Projects</span>
+            {t.projects.title.split(' ')[0]} <span className="text-gradient">{t.projects.title.split(' ').slice(1).join(' ')}</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            A selection of projects that showcase my skills and passion for web development
+            {t.projects.description}
           </p>
         </div>
 
@@ -91,15 +98,15 @@ const ProjectsSection = () => {
         <div className="flex flex-wrap justify-center gap-3 mb-12">
           {filters.map((filter) => (
             <button
-              key={filter}
-              onClick={() => setActiveFilter(filter)}
-              className={`px-5 py-2 rounded-full font-medium transition-all duration-300 capitalize ${
-                activeFilter === filter
+              key={filter.key}
+              onClick={() => setActiveFilter(filter.key)}
+              className={`px-5 py-2 rounded-full font-medium transition-all duration-300 ${
+                activeFilter === filter.key
                   ? 'bg-primary text-primary-foreground shadow-[0_0_20px_hsl(174_72%_56%/0.4)]'
                   : 'glass-card text-muted-foreground hover:text-primary hover:border-primary/50'
               }`}
             >
-              {filter}
+              {filter.label}
             </button>
           ))}
         </div>
@@ -125,14 +132,14 @@ const ProjectsSection = () => {
                   <a
                     href={project.liveUrl}
                     className="p-3 rounded-full bg-primary text-primary-foreground hover:scale-110 transition-transform"
-                    aria-label="View live site"
+                    aria-label={t.projects.liveDemo}
                   >
                     <ExternalLink className="w-5 h-5" />
                   </a>
                   <a
                     href={project.githubUrl}
                     className="p-3 rounded-full bg-card text-foreground hover:scale-110 transition-transform border border-border"
-                    aria-label="View source code"
+                    aria-label={t.projects.sourceCode}
                   >
                     <Github className="w-5 h-5" />
                   </a>
@@ -172,7 +179,7 @@ const ProjectsSection = () => {
         {/* View All Button */}
         <div className="text-center mt-12">
           <Button variant="outline" size="lg" className="group">
-            View All Projects
+            {t.projects.viewAll}
             <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
           </Button>
         </div>

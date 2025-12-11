@@ -1,6 +1,8 @@
 import { useEffect, useState, useRef } from 'react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const SkillsSection = () => {
+  const { t } = useLanguage();
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLDivElement>(null);
 
@@ -47,6 +49,13 @@ const SkillsSection = () => {
     { name: 'Git', icon: '📦' },
   ];
 
+  const stats = [
+    { value: '2+', label: t.skills.stats.experience },
+    { value: '30+', label: t.skills.stats.projects },
+    { value: '20+', label: t.skills.stats.clients },
+    { value: '99%', label: t.skills.stats.satisfaction },
+  ];
+
   return (
     <section id="skills" className="py-24 relative" ref={sectionRef}>
       {/* Background decoration */}
@@ -57,12 +66,12 @@ const SkillsSection = () => {
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16">
-          <span className="text-primary font-mono text-sm mb-2 block">// My Skills</span>
+          <span className="text-primary font-mono text-sm mb-2 block">{t.skills.sectionTitle}</span>
           <h2 className="text-4xl md:text-5xl font-mono font-bold mb-4">
-            Technical <span className="text-gradient">Expertise</span>
+            {t.skills.title.split(' ')[0]} <span className="text-gradient">{t.skills.title.split(' ').slice(1).join(' ')}</span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-            Constantly learning and improving my skills to deliver the best solutions
+            {t.skills.description}
           </p>
         </div>
 
@@ -90,12 +99,7 @@ const SkillsSection = () => {
 
           {/* Stats */}
           <div className="grid grid-cols-2 gap-6">
-            {[
-              { value: '2+', label: 'Years Experience' },
-              { value: '30+', label: 'Projects Completed' },
-              { value: '20+', label: 'Happy Clients' },
-              { value: '99%', label: 'Client Satisfaction' },
-            ].map((stat, index) => (
+            {stats.map((stat, index) => (
               <div
                 key={stat.label}
                 className="glass-card rounded-2xl p-6 text-center hover-glow"
@@ -112,9 +116,9 @@ const SkillsSection = () => {
 
         {/* Technology Tags */}
         <div className="glass-card rounded-2xl p-8">
-          <h3 className="font-mono font-semibold text-xl mb-6 text-center">Technologies I Work With</h3>
+          <h3 className="font-mono font-semibold text-xl mb-6 text-center">{t.skills.technologies}</h3>
           <div className="flex flex-wrap justify-center gap-3">
-            {technologies.map((tech, index) => (
+            {technologies.map((tech) => (
               <div
                 key={tech.name}
                 className="px-4 py-2 rounded-full border border-border/50 bg-muted/30 hover:border-primary/50 hover:bg-primary/10 transition-all duration-300 cursor-default group"

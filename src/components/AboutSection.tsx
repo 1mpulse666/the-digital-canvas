@@ -1,26 +1,29 @@
 import { Code, Palette, Zap, Users } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const AboutSection = () => {
+  const { t } = useLanguage();
+
   const highlights = [
     {
       icon: Code,
-      title: 'Clean Code',
-      description: 'Writing maintainable, scalable, and well-documented code',
+      title: t.about.highlights.cleanCode.title,
+      description: t.about.highlights.cleanCode.description,
     },
     {
       icon: Palette,
-      title: 'Modern Design',
-      description: 'Creating visually stunning and intuitive user interfaces',
+      title: t.about.highlights.modernDesign.title,
+      description: t.about.highlights.modernDesign.description,
     },
     {
       icon: Zap,
-      title: 'Performance',
-      description: 'Optimizing for speed and smooth user experiences',
+      title: t.about.highlights.performance.title,
+      description: t.about.highlights.performance.description,
     },
     {
       icon: Users,
-      title: 'Collaboration',
-      description: 'Working closely with clients to bring their vision to life',
+      title: t.about.highlights.collaboration.title,
+      description: t.about.highlights.collaboration.description,
     },
   ];
 
@@ -69,21 +72,16 @@ const AboutSection = () => {
           {/* Right Side - Content */}
           <div className="space-y-8">
             <div>
-              <span className="text-primary font-mono text-sm mb-2 block">// About Me</span>
+              <span className="text-primary font-mono text-sm mb-2 block">{t.about.sectionTitle}</span>
               <h2 className="text-4xl md:text-5xl font-mono font-bold mb-6">
-                Passionate About{' '}
-                <span className="text-gradient">Creating</span>
+                {t.about.title}{' '}
+                <span className="text-gradient">{t.about.titleHighlight}</span>
               </h2>
               <p className="text-muted-foreground text-lg leading-relaxed mb-4">
-                I'm a freelance web developer with a passion for building beautiful, 
-                functional, and user-centered digital experiences. With a strong foundation 
-                in modern web technologies, I transform complex problems into simple, 
-                elegant solutions.
+                {t.about.description1}
               </p>
               <p className="text-muted-foreground text-lg leading-relaxed">
-                My journey in web development started with curiosity and has evolved into 
-                a dedicated pursuit of excellence. Every project is an opportunity to push 
-                boundaries and deliver something extraordinary.
+                {t.about.description2}
               </p>
             </div>
 

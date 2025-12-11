@@ -1,20 +1,16 @@
-import { Code2, Github, Linkedin, Twitter, Heart } from 'lucide-react';
+import { Code2, Github, Heart } from 'lucide-react';
+import { useLanguage } from '@/contexts/LanguageContext';
 
 const Footer = () => {
+  const { t } = useLanguage();
   const currentYear = new Date().getFullYear();
 
-  const socialLinks = [
-    { icon: Github, href: '#', label: 'GitHub' },
-    { icon: Linkedin, href: '#', label: 'LinkedIn' },
-    { icon: Twitter, href: '#', label: 'Twitter' },
-  ];
-
   const footerLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Services', href: '#services' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Contact', href: '#contact' },
+    { name: t.nav.about, href: '#about' },
+    { name: t.nav.skills, href: '#skills' },
+    { name: t.nav.services, href: '#services' },
+    { name: t.nav.projects, href: '#projects' },
+    { name: t.nav.contact, href: '#contact' },
   ];
 
   const scrollToSection = (href: string) => {
@@ -32,16 +28,16 @@ const Footer = () => {
           <div className="space-y-4">
             <a href="#" className="flex items-center gap-2 text-xl font-mono font-bold text-gradient">
               <Code2 className="w-6 h-6 text-primary" />
-              <span>DevAlex</span>
+              <span>DevArtem</span>
             </a>
             <p className="text-muted-foreground text-sm leading-relaxed">
-              Building beautiful, functional web experiences. Let's create something amazing together.
+              {t.footer.description}
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
-            <h3 className="font-mono font-semibold">Quick Links</h3>
+            <h3 className="font-mono font-semibold">{t.footer.quickLinks}</h3>
             <nav className="flex flex-wrap gap-x-6 gap-y-2">
               {footerLinks.map((link) => (
                 <button
@@ -57,18 +53,15 @@ const Footer = () => {
 
           {/* Social Links */}
           <div className="space-y-4">
-            <h3 className="font-mono font-semibold">Connect</h3>
+            <h3 className="font-mono font-semibold">{t.footer.connect}</h3>
             <div className="flex gap-3">
-              {socialLinks.map((social) => (
-                <a
-                  key={social.label}
-                  href={social.href}
-                  className="p-2 rounded-lg glass-card border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
-                  aria-label={social.label}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
-              ))}
+              <a
+                href="#"
+                className="p-2 rounded-lg glass-card border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
+                aria-label="GitHub"
+              >
+                <Github className="w-5 h-5" />
+              </a>
             </div>
           </div>
         </div>
@@ -76,10 +69,10 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-border/30 flex flex-col md:flex-row justify-between items-center gap-4">
           <p className="text-muted-foreground text-sm flex items-center gap-1">
-            © {currentYear} DevAlex. Made with <Heart className="w-4 h-4 text-destructive fill-destructive" /> and lots of ☕
+            © {currentYear} DevArtem. {t.footer.madeWith} <Heart className="w-4 h-4 text-destructive fill-destructive" /> {t.footer.and} {t.footer.coffee}
           </p>
           <p className="text-muted-foreground text-sm font-mono">
-            {'<'} Built with React + TypeScript {' />'}
+            {'<'} {t.footer.builtWith} {' />'}
           </p>
         </div>
       </div>
