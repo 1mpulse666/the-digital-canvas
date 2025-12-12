@@ -37,18 +37,11 @@ const AboutSection = () => {
               {/* Decorative Elements */}
               <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-secondary/20 rounded-3xl rotate-6 glow-primary" />
               <div className="absolute inset-0 glass-card rounded-3xl overflow-hidden">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-8">
-                    <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                      <span className="text-5xl font-mono font-bold text-primary-foreground">A</span>
-                    </div>
-                    <div className="space-y-2">
-                      <div className="h-3 bg-primary/30 rounded-full w-3/4 mx-auto" />
-                      <div className="h-3 bg-secondary/30 rounded-full w-1/2 mx-auto" />
-                      <div className="h-3 bg-accent/30 rounded-full w-2/3 mx-auto" />
-                    </div>
-                  </div>
-                </div>
+                <img 
+                  src="https://i.ibb.co/Qjz9bFt6/photo-2025-12-10-09-00-26.jpg" 
+                  alt="Артем"
+                  className="w-full h-full object-cover"
+                />
                 
                 {/* Code-like decorations */}
                 <div className="absolute top-4 left-4 font-mono text-xs text-primary/60">

@@ -103,7 +103,9 @@ const HeroSection = () => {
           {/* Social Links */}
           <div className="flex gap-4 justify-center animate-slide-up" style={{ animationDelay: '0.8s' }}>
             <a
-              href="#"
+              href="https://github.com/1mpulse666"
+              target="_blank"
+              rel="noopener noreferrer"
               className="p-3 rounded-full glass-card border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300 hover-glow"
               aria-label="GitHub"
             >
