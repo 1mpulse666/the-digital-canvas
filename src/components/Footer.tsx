@@ -56,7 +56,9 @@ const Footer = () => {
             <h3 className="font-mono font-semibold">{t.footer.connect}</h3>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://github.com/1mpulse666"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-2 rounded-lg glass-card border border-border/50 text-muted-foreground hover:text-primary hover:border-primary/50 transition-all duration-300"
                 aria-label="GitHub"
               >
