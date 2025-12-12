@@ -5,6 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: '/the-digital-canvas/',
   server: {
     host: "::",
     port: 8080,
@@ -16,12 +17,3 @@ export default defineConfig(({ mode }) => ({
     },
   },
 }));
-
-  import { defineConfig } from 'vite'
-  import react from '@vitejs/plugin-react'
-  import tsconfigPaths from 'vite-tsconfig-paths'
-
-  export default defineConfig({
-  base: '/the-digital-canvas/',
-  plugins: [react(), tsconfigPaths()],
-})
